@@ -9,7 +9,7 @@ function App() {
     const countVisit = async () => {
       try {
         const response = await fetch(
-          "https://counterapi.com/api/user-viewer.vercel.app/view/home"
+          "https://counterapi.com/api/kenneth-user-viewer-2026/view/home"
         );
 
         const data = await response.json();
@@ -26,59 +26,128 @@ function App() {
   }, []);
 
   return (
-    <main className="visitor-page">
-      <div className="glow glow-one"></div>
-      <div className="glow glow-two"></div>
+    <main className="page">
+      <div className="background-shape shape-one"></div>
+      <div className="background-shape shape-two"></div>
 
-      <section className="visitor-card">
-        <div className="live-badge">
-          <span className="live-dot"></span>
-          LIVE VISITOR COUNTER
-        </div>
+      <div className="container">
+        <header className="header">
+          <div className="brand">
+            <div className="brand-icon">V</div>
 
-        <p className="small-title">
-          TOTAL WEBSITE VISITS
-        </p>
+            <span className="brand-name">
+              visitly
+            </span>
+          </div>
 
-        <h1 className="visitor-number">
-          {loading ? "..." : visitors.toLocaleString()}
-        </h1>
+          <div className="online-badge">
+            <span className="online-dot"></span>
+            LIVE
+          </div>
+        </header>
 
-        <p className="visitor-label">
-          Visits
-        </p>
+        <section className="hero">
+          <div className="mascot">
+            👋
+          </div>
 
-        <div className="divider"></div>
+          <p className="eyebrow">
+            WEBSITE VISITOR COUNTER
+          </p>
 
-        <p className="description">
-          Every time someone visits this website,
-          <br />
-          the visitor count increases automatically.
-        </p>
+          <h1>
+            Every visit
+            <span> counts!</span>
+          </h1>
 
-        <div className="status-box">
-          <span
-            className="status-icon"
-            style={{
-              background: "#3dff8b",
-            }}
-          ></span>
+          <p className="hero-description">
+            See how many times people have visited this website.
+          </p>
+        </section>
+
+        <section className="counter-card">
+          <div className="counter-top">
+            <div>
+              <p className="counter-label">
+                TOTAL VISITS
+              </p>
+
+              <h2>
+                {loading
+                  ? "..."
+                  : visitors.toLocaleString()}
+              </h2>
+            </div>
+
+            <div className="counter-icon">
+              👀
+            </div>
+          </div>
+
+          <div className="progress-container">
+            <div className="progress-bar">
+              <div className="progress-fill"></div>
+            </div>
+
+            <div className="progress-info">
+              <span>Growing every day</span>
+              <span>🔥</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-icon">
+              🌎
+            </div>
+
+            <div>
+              <p className="stat-title">
+                Global
+              </p>
+
+              <p className="stat-description">
+                Shared counter
+              </p>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">
+              ⚡
+            </div>
+
+            <div>
+              <p className="stat-title">
+                Live
+              </p>
+
+              <p className="stat-description">
+                Updates on visits
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="message-card">
+          <div className="message-icon">
+            🎉
+          </div>
 
           <div>
-            <p className="status-title">
-              Counter Active
-            </p>
+            <h3>Thanks for visiting!</h3>
 
-            <p className="status-text">
-              Global visitor tracking enabled
+            <p>
+              You just helped increase the visitor count.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <p className="footer-text">
-        Visitor Counter • React + Vite
-      </p>
+        <footer>
+          Built with React + Vite
+        </footer>
+      </div>
     </main>
   );
 }
