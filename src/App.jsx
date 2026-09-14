@@ -4,19 +4,26 @@ import "./App.css";
 function App() {
   const [visitors, setVisitors] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const countVisit = async () => {
       try {
-        const response = await fetch(
-          "https://counterapi.com/api/kenneth-user-viewer-2026/view/home"
-        );
+        const response = await fetch("/api/visitors", {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update visitor counter");
+        }
 
         const data = await response.json();
 
-        setVisitors(data.value || 0);
+        setVisitors(data.visitors ?? 0);
       } catch (error) {
         console.error("Counter error:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -75,6 +82,8 @@ function App() {
               <h2>
                 {loading
                   ? "..."
+                  : error
+                  ? "—"
                   : visitors.toLocaleString()}
               </h2>
             </div>
@@ -108,7 +117,7 @@ function App() {
               </p>
 
               <p className="stat-description">
-                Shared counter
+                One shared counter
               </p>
             </div>
           </div>
@@ -124,7 +133,7 @@ function App() {
               </p>
 
               <p className="stat-description">
-                Updates on visits
+                Updates every visit
               </p>
             </div>
           </div>
@@ -136,10 +145,16 @@ function App() {
           </div>
 
           <div>
-            <h3>Thanks for visiting!</h3>
+            <h3>
+              {error
+                ? "Counter unavailable"
+                : "Thanks for visiting!"}
+            </h3>
 
             <p>
-              You just helped increase the visitor count.
+              {error
+                ? "Please try again later."
+                : "You just helped increase the visitor count."}
             </p>
           </div>
         </section>
